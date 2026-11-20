@@ -137,23 +137,38 @@
             </div>
           </div>
 
-          <!-- Unterer Bereich der Zufalls-Karte: Auslöse-Button -->
-          <div class="mt-8 pt-5 border-t border-sandBorder/80 flex flex-wrap items-center justify-between gap-4">
-            <button
-              id="newRandomBtn"
-              type="button"
-              class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-terracotta hover:bg-terracottaDark active:scale-[0.99] text-white text-sm font-medium transition-all cursor-pointer"
-            >
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M20 9A8 8 0 006.3 5.3L4 9m16 6l-2.3 3.7A8 8 0 014 15" />
-              </svg>
-              <span>Neues Zufallsgericht</span>
-            </button>
+          <!-- Unterer Bereich der Zufalls-Karte: Auslöse-Button & Google-Rezept-Link -->
+          <div class="mt-8 pt-5 border-t border-sandBorder/80 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <button
+                id="newRandomBtn"
+                type="button"
+                class="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-terracotta hover:bg-terracottaDark active:scale-[0.99] text-white text-sm font-medium transition-all cursor-pointer"
+              >
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20 9A8 8 0 006.3 5.3L4 9m16 6l-2.3 3.7A8 8 0 014 15" />
+                </svg>
+                <span>Neues Zufallsgericht</span>
+              </button>
 
-            <span id="matchCounterText" class="text-xs font-medium text-espressoMuted">
-              62 von 62 Gerichten aktiv
-            </span>
+              <a
+                id="recipeGoogleLink"
+                href="https://www.google.com/search?q=Rezept"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-linen hover:bg-linenSoft border border-sandBorder text-espresso hover:text-terracotta text-sm font-medium transition-colors"
+              >
+                <svg class="w-4 h-4 text-olive" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="7" />
+                  <path stroke-linecap="round" d="M20 20l-3.5-3.5" />
+                </svg>
+                <span>Rezept auf Google suchen</span>
+                <svg class="w-3.5 h-3.5 opacity-60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5M10 14L19 5M19 14v5H5V5h5" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -255,15 +270,22 @@
               </div>
             </div>
           </div>
+
+          <!-- Trefferzähler unten in der Filterkarte -->
+          <div class="mt-4 pt-3 border-t border-sandBorder/70 flex items-center justify-between text-xs text-espressoMuted">
+            <span id="matchCounterText" class="font-medium">62 von 62 Gerichten</span>
+            <span>Klick auf Zeile wählt Gericht</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 2. SCHLICHTE, SORTIERBARE GERICHTE-TABELLE (ALLE 6 TABELLENÜBERSCHRIFTEN) -->
+    <!-- 2. SCHLICHTE, SORTIERBARE GERICHTE-TABELLE & RESPONSIVE MOBIL-KARTEN -->
     <section aria-label="Alle Gerichte">
       <div class="bg-white rounded-2xl border border-sandBorder shadow-soft overflow-hidden">
-        <div class="overflow-x-auto">
-          <table class="w-full text-left border-collapse min-w-[680px]">
+        <!-- Desktop- & Tablet-Tabelle -->
+        <div class="hidden md:block overflow-x-auto">
+          <table class="w-full text-left border-collapse">
             <thead>
               <tr class="bg-linenSoft/80 border-b border-sandBorder text-espresso">
                 <th
@@ -285,30 +307,30 @@
                   </div>
                 </th>
                 <th
-                  data-sort="kinder"
+                  data-sort="kinderKompatibel"
                   class="sort-th py-3.5 px-4 text-xs font-semibold uppercase tracking-wider text-center cursor-pointer select-none hover:bg-linenSoft transition-colors"
                 >
                   <div class="inline-flex items-center justify-center gap-1">
                     <span>Kinder-Kompatibel</span>
-                    <span class="sort-indicator text-espressoMuted/50" data-col="kinder">↕</span>
+                    <span class="sort-indicator text-espressoMuted/50" data-col="kinderKompatibel">↕</span>
                   </div>
                 </th>
                 <th
-                  data-sort="einkauf"
+                  data-sort="zeitnaherEinkauf"
                   class="sort-th py-3.5 px-4 text-xs font-semibold uppercase tracking-wider text-center cursor-pointer select-none hover:bg-linenSoft transition-colors"
                 >
                   <div class="inline-flex items-center justify-center gap-1">
                     <span>Zeitnaher Einkauf</span>
-                    <span class="sort-indicator text-espressoMuted/50" data-col="einkauf">↕</span>
+                    <span class="sort-indicator text-espressoMuted/50" data-col="zeitnaherEinkauf">↕</span>
                   </div>
                 </th>
                 <th
-                  data-sort="einfach"
+                  data-sort="einfachKochbar"
                   class="sort-th py-3.5 px-4 text-xs font-semibold uppercase tracking-wider text-center cursor-pointer select-none hover:bg-linenSoft transition-colors"
                 >
                   <div class="inline-flex items-center justify-center gap-1">
                     <span>Einfach kochbar</span>
-                    <span class="sort-indicator text-espressoMuted/50" data-col="einfach">↕</span>
+                    <span class="sort-indicator text-espressoMuted/50" data-col="einfachKochbar">↕</span>
                   </div>
                 </th>
                 <th
@@ -326,6 +348,11 @@
               <!-- Wird dynamisch per JS befüllt -->
             </tbody>
           </table>
+        </div>
+
+        <!-- Mobile Kartenansicht (< md) -->
+        <div id="dishesMobileCards" class="md:hidden divide-y divide-sandBorder/70">
+          <!-- Wird dynamisch per JS befüllt -->
         </div>
 
         <!-- Leerer Zustand bei 0 Treffern -->
@@ -354,78 +381,89 @@
   </footer>
 
   <script>
-    // Vollständige Datenbasis (62 Gerichte aus "FamilyFood - Essen")
-    const DISHES = [
-      { essen: "Lasagne", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Selbstgemachte Pizza", vorkochbar: "Nein", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Spaghetti Bolognese", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Nudeln mit Garnelen und Speck", vorkochbar: "Ja", kinder: "Nein", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Schnitzel mit Pommes", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Kotelett mit Kartoffeln", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Panierter Fisch mit Kartoffelbrei", vorkochbar: "Nein", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Gulasch mit Nudeln", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Hühnersuppe", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Gebackenes Hähnchen mit Kartoffeln", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Sauerbraten mit Knödel", vorkochbar: "Nein", kinder: "Nein", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Schäufele mit Knödel", vorkochbar: "Nein", kinder: "Nein", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Königsberger Klopse", vorkochbar: "Nein", kinder: "Nein", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Thailändisch mit Reis", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Hühnerfrikassee mit Reis", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Mehlklöße", vorkochbar: "Nein", kinder: "Nein", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Gyros Wraps", vorkochbar: "Nein", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Speck-Eier Sosse mit Kartoffel", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Mac&Cheese", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Nudelauflauf", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Curry Wurst mit Pommes", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Rahmgeschnetzeltes mit Spätzle", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Flietten", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Lachs mit Ofengemüse", vorkochbar: "Nein", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Langos", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Grillen", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Maultaschen", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Käsespätzle", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Spaghetti mit Thunfisch", vorkochbar: "Nein", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Rouladen mit Klösen", vorkochbar: "Nein", kinder: "Nein", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Mojo Kartoffeln", vorkochbar: "Nein", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Dämscha", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Quiche Lorraine", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Hackbällchen Toscana mit Reis", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Hamburger", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Ja", bestellung: "Nein" },
-      { essen: "falscher Hase", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Salzbraten", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Spaghetti Carbonara", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Tortellini", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Chicken Nuggets", vorkochbar: "Nein", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Kartoffelsalat", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Nudelsalat", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Sandwichmaker Sandwiches", vorkochbar: "Nein", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Schweinefiletmedaillons mit Spätzle", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Wurstsalat", vorkochbar: "Ja", kinder: "Nein", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Teerdich", vorkochbar: "Ja", kinder: "Nein", einkauf: "—", einfach: "Nein", bestellung: "Nein" },
-      { essen: "gefüllte Paprika", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Spaghetti mit Pesto", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Frikadellen mit Kartoffelbrei", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Pizzabrötchen", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Miesmuscheln mit Pasta", vorkochbar: "Nein", kinder: "Nein", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Kartoffegratin", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Hot Dog", vorkochbar: "Nein", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Kasspressknödel", vorkochbar: "Ja", kinder: "Nein", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Chili Con Carne", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Hähnchen mit Kartoffeln in der Fettpfanne", vorkochbar: "Nein", kinder: "Ja", einkauf: "Ja", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Raclette", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Nein", bestellung: "Nein" },
-      { essen: "Fondue", vorkochbar: "Ja", kinder: "Ja", einkauf: "Ja", einfach: "Ja", bestellung: "Nein" },
-      { essen: "Zum Bestellen - Indisch", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Ja" },
-      { essen: "Zum Bestellen - Pizza", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Ja" },
-      { essen: "Zum Bestellen - Döner", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Ja" },
-      { essen: "Zum Bestellen - McDonalds, KFC,..", vorkochbar: "Ja", kinder: "Ja", einkauf: "Nein", einfach: "Ja", bestellung: "Ja" }
+    // Vollständige Datenbasis (62 Gerichte aus "FamilyFood - Essen", leeres Feld bei Teerdich = false)
+    const RAW_DISHES = [
+      {"essen": "Lasagne", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Selbstgemachte Pizza", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Spaghetti Bolognese", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Nudeln mit Garnelen und Speck", "vorkochbar": true, "kinderKompatibel": false, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Schnitzel mit Pommes", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Kotelett mit Kartoffeln", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Panierter Fisch mit Kartoffelbrei", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Gulasch mit Nudeln", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Hühnersuppe", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Gebackenes Hähnchen mit Kartoffeln", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Sauerbraten mit Knödel", "vorkochbar": false, "kinderKompatibel": false, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Schäufele mit Knödel", "vorkochbar": false, "kinderKompatibel": false, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Königsberger Klopse", "vorkochbar": false, "kinderKompatibel": false, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Thailändisch mit Reis", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Hühnerfrikassee mit Reis", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Mehlklöße", "vorkochbar": false, "kinderKompatibel": false, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Gyros Wraps", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Speck-Eier Sosse mit Kartoffel", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Mac&Cheese", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Nudelauflauf", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Curry Wurst mit Pommes", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Rahmgeschnetzeltes mit Spätzle", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Flietten", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Lachs mit Ofengemüse", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Langos", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Grillen", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Maultaschen", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Käsespätzle", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Spaghetti mit Thunfisch", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Rouladen mit Klösen", "vorkochbar": false, "kinderKompatibel": false, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Mojo Kartoffeln", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Dämscha", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Quiche Lorraine", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Hackbällchen Toscana mit Reis", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Hamburger", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": true, "bestellung": false},
+      {"essen": "falscher Hase", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Salzbraten", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Spaghetti Carbonara", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Tortellini", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Chicken Nuggets", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Kartoffelsalat", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Nudelsalat", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Sandwichmaker Sandwiches", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Schweinefiletmedaillons mit Spätzle", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Wurstsalat", "vorkochbar": true, "kinderKompatibel": false, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Teerdich", "vorkochbar": true, "kinderKompatibel": false, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "gefüllte Paprika", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Spaghetti mit Pesto", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Frikadellen mit Kartoffelbrei", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Pizzabrötchen", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Miesmuscheln mit Pasta", "vorkochbar": false, "kinderKompatibel": false, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Kartoffegratin", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Hot Dog", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Kasspressknödel", "vorkochbar": true, "kinderKompatibel": false, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Chili Con Carne", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Hähnchen mit Kartoffeln in der Fettpfanne", "vorkochbar": false, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Raclette", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": false, "bestellung": false},
+      {"essen": "Fondue", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": true, "einfachKochbar": true, "bestellung": false},
+      {"essen": "Zum Bestellen - Indisch", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": true},
+      {"essen": "Zum Bestellen - Pizza", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": true},
+      {"essen": "Zum Bestellen - Döner", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": true},
+      {"essen": "Zum Bestellen - McDonalds, KFC,..", "vorkochbar": true, "kinderKompatibel": true, "zeitnaherEinkauf": false, "einfachKochbar": true, "bestellung": true}
     ];
+
+    // Normalisierung auf "Ja" / "Nein" für einheitliche Filter- und Tabellenlogik
+    const DISHES = RAW_DISHES.map((d, idx) => ({
+      id: idx,
+      essen: d.essen,
+      vorkochbar: d.vorkochbar ? "Ja" : "Nein",
+      kinderKompatibel: d.kinderKompatibel ? "Ja" : "Nein",
+      zeitnaherEinkauf: d.zeitnaherEinkauf ? "Ja" : "Nein",
+      einfachKochbar: d.einfachKochbar ? "Ja" : "Nein",
+      bestellung: d.bestellung ? "Ja" : "Nein"
+    }));
 
     // Metadaten der 5 Eigenschafts-Spalten für Badges
     const PROPERTY_LABELS = [
       { key: "vorkochbar", label: "Vorkochbar" },
-      { key: "kinder", label: "Kinder-Kompatibel" },
-      { key: "einkauf", label: "Zeitnaher Einkauf" },
-      { key: "einfach", label: "Einfach kochbar" },
+      { key: "kinderKompatibel", label: "Kinder-Kompatibel" },
+      { key: "zeitnaherEinkauf", label: "Zeitnaher Einkauf" },
+      { key: "einfachKochbar", label: "Einfach kochbar" },
       { key: "bestellung", label: "Bestellung" }
     ];
 
@@ -448,14 +486,30 @@
     const resetFiltersBtn = document.getElementById("resetFiltersBtn");
     const emptyResetBtn = document.getElementById("emptyResetBtn");
     const dishesTableBody = document.getElementById("dishesTableBody");
+    const dishesMobileCards = document.getElementById("dishesMobileCards");
     const emptyState = document.getElementById("emptyState");
 
     const randomDishWrapper = document.getElementById("randomDishWrapper");
     const randomDishTitle = document.getElementById("randomDishTitle");
     const randomDishBadges = document.getElementById("randomDishBadges");
     const newRandomBtn = document.getElementById("newRandomBtn");
+    const recipeGoogleLink = document.getElementById("recipeGoogleLink");
     const poolStatusText = document.getElementById("poolStatusText");
     const matchCounterText = document.getElementById("matchCounterText");
+
+    /**
+     * Prüft, ob aktuell mindestens ein Filter aktiv ist.
+     */
+    function hasActiveFilters() {
+      return (
+        state.search.trim().length > 0 ||
+        state.vorkochbar !== "all" ||
+        state.kinder !== "all" ||
+        state.einkauf !== "all" ||
+        state.einfach !== "all" ||
+        state.bestellung !== "all"
+      );
+    }
 
     /**
      * Filtert und sortiert die Gerichte gemäß aktuellem Zustand.
@@ -466,9 +520,9 @@
       const filtered = DISHES.filter((dish) => {
         if (query && !dish.essen.toLowerCase().includes(query)) return false;
         if (state.vorkochbar !== "all" && dish.vorkochbar !== state.vorkochbar) return false;
-        if (state.kinder !== "all" && dish.kinder !== state.kinder) return false;
-        if (state.einkauf !== "all" && dish.einkauf !== state.einkauf) return false;
-        if (state.einfach !== "all" && dish.einfach !== state.einfach) return false;
+        if (state.kinder !== "all" && dish.kinderKompatibel !== state.kinder) return false;
+        if (state.einkauf !== "all" && dish.zeitnaherEinkauf !== state.einkauf) return false;
+        if (state.einfach !== "all" && dish.einfachKochbar !== state.einfach) return false;
         if (state.bestellung !== "all" && dish.bestellung !== state.bestellung) return false;
         return true;
       });
@@ -481,8 +535,7 @@
           return a.essen.localeCompare(b.essen, "de", { sensitivity: "base" }) * dir;
         }
 
-        // Sortiergewicht: Ja (2) > Nein (1) > — (0)
-        const rank = (val) => (val === "Ja" ? 2 : val === "Nein" ? 1 : 0);
+        const rank = (val) => (val === "Ja" ? 1 : 0);
         const diff = rank(a[col]) - rank(b[col]);
         if (diff !== 0) return diff * dir;
 
@@ -493,37 +546,37 @@
     }
 
     /**
-     * Wählt ein Zufallsgericht aus der aktuell gefilterten Liste aus.
+     * Zeigt ein konkretes Gericht in der Zufallsgericht-Karte inkl. Google-Rezeptlink an.
      */
-    function pickRandomDish(filteredList, avoidSame = true) {
-      if (filteredList.length === 0) {
+    function displayFeaturedDish(dish) {
+      if (!dish) {
         state.currentDish = null;
         randomDishTitle.textContent = "Kein Gericht in dieser Auswahl";
         randomDishBadges.innerHTML = `
           <span class="text-xs text-espressoMuted">
-            Bitte ändere rechts die Filter, um ein passendes Gericht auszulosen.
+            Bitte passe rechts die Filter an, um ein passendes Gericht auszulosen.
           </span>
         `;
+        recipeGoogleLink.classList.add("pointer-events-none", "opacity-40");
+        recipeGoogleLink.href = "https://www.google.com/search?q=Rezept";
         return;
       }
 
-      let candidates = filteredList;
-      if (avoidSame && state.currentDish && filteredList.length > 1) {
-        candidates = filteredList.filter((d) => d.essen !== state.currentDish.essen);
-      }
+      state.currentDish = dish;
 
-      const chosen = candidates[Math.floor(Math.random() * candidates.length)];
-      state.currentDish = chosen;
-
-      // Animation neu auslösen
+      // Einblend-Animation neu starten
       randomDishWrapper.classList.remove("animate-dish");
       void randomDishWrapper.offsetWidth;
       randomDishWrapper.classList.add("animate-dish");
 
-      randomDishTitle.textContent = chosen.essen;
+      randomDishTitle.textContent = dish.essen;
 
-      // Aktive Eigenschaften ("Ja") als dezente mediterrane Badges anzeigen
-      const activeBadges = PROPERTY_LABELS.filter((prop) => chosen[prop.key] === "Ja").map(
+      // Google-Suchlink für Rezept aktualisieren
+      recipeGoogleLink.classList.remove("pointer-events-none", "opacity-40");
+      recipeGoogleLink.href = `https://www.google.com/search?q=${encodeURIComponent(dish.essen + " Rezept")}`;
+
+      // Aktive Eigenschaften ("Ja") als olivengrüne Badges darstellen
+      const activeBadges = PROPERTY_LABELS.filter((prop) => dish[prop.key] === "Ja").map(
         (prop) => `
           <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-oliveSoft text-olive border border-olive/20">
             <span class="w-1.5 h-1.5 rounded-full bg-olive"></span>
@@ -537,27 +590,38 @@
       } else {
         randomDishBadges.innerHTML = `
           <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-linen text-espressoMuted border border-sandBorder">
-            Klassisches Familiengericht (keine speziellen Tags)
+            Klassisches Familiengericht
           </span>
         `;
       }
     }
 
     /**
-     * Formatiert einen Zellenwert ("Ja", "Nein", "—") schlicht und mediterran.
+     * Wählt ein Zufallsgericht aus der aktuell gefilterten Liste aus.
+     */
+    function pickRandomDish(filteredList, avoidSame = true) {
+      if (filteredList.length === 0) {
+        displayFeaturedDish(null);
+        return;
+      }
+
+      let candidates = filteredList;
+      if (avoidSame && state.currentDish && filteredList.length > 1) {
+        candidates = filteredList.filter((d) => d.id !== state.currentDish.id);
+      }
+
+      const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+      displayFeaturedDish(chosen);
+    }
+
+    /**
+     * Formatiert einen Zellenwert ("Ja" / "Nein") schlicht und mediterran.
      */
     function renderTableCellBadge(val) {
       if (val === "Ja") {
         return `
           <span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-oliveSoft text-olive">
             Ja
-          </span>
-        `;
-      }
-      if (val === "—") {
-        return `
-          <span class="inline-flex items-center justify-center px-2.5 py-0.5 rounded-full text-xs font-medium text-espressoMuted/70" title="Nicht hinterlegt">
-            —
           </span>
         `;
       }
@@ -617,17 +681,24 @@
     }
 
     /**
-     * Rendert Tabelle, Zähler und aktualisiert bei Bedarf das Zufallsgericht.
+     * Rendert Desktop-Tabelle, Mobile-Kartenansicht, Zähler und aktualisiert bei Bedarf das Zufallsgericht.
      */
     function updateView(ensureRandomMatchesFilter = true) {
       const filtered = getFilteredDishes();
 
       // Zähler & Pool-Hinweis aktualisieren
-      matchCounterText.textContent = `${filtered.length} von ${DISHES.length} Gerichten aktiv`;
+      matchCounterText.textContent = `${filtered.length} von ${DISHES.length} Gerichten`;
       if (filtered.length === DISHES.length) {
         poolStatusText.textContent = `Aus allen ${DISHES.length} Gerichten`;
       } else {
         poolStatusText.textContent = `Aus ${filtered.length} gefilterten Gerichten`;
+      }
+
+      // Reset-Button nur sichtbar/hervorgehoben wenn Filter aktiv
+      if (hasActiveFilters()) {
+        resetFiltersBtn.classList.remove("opacity-40", "pointer-events-none");
+      } else {
+        resetFiltersBtn.classList.add("opacity-40", "pointer-events-none");
       }
 
       // Suchfeld-Löschen-Button steuern
@@ -640,46 +711,93 @@
       // Falls aktuelles Zufallsgericht nicht mehr in den gefilterten Ergebnissen liegt, automatisch neu auslosen
       if (ensureRandomMatchesFilter) {
         const stillValid =
-          state.currentDish && filtered.some((d) => d.essen === state.currentDish.essen);
+          state.currentDish && filtered.some((d) => d.id === state.currentDish.id);
         if (!stillValid) {
           pickRandomDish(filtered, false);
         }
       }
 
-      // Tabelle rendern
+      // Leerer Zustand
       if (filtered.length === 0) {
         dishesTableBody.innerHTML = "";
+        dishesMobileCards.innerHTML = "";
         emptyState.classList.remove("hidden");
         return;
       }
 
       emptyState.classList.add("hidden");
+
+      // 1. Desktop-Tabellenzeilen rendern
       dishesTableBody.innerHTML = filtered
-        .map(
-          (dish) => `
-          <tr class="hover:bg-linen/70 transition-colors">
-            <td class="py-3 px-5 font-medium text-espresso">
-              ${escapeHtml(dish.essen)}
-            </td>
-            <td class="py-3 px-4 text-center">
-              ${renderTableCellBadge(dish.vorkochbar)}
-            </td>
-            <td class="py-3 px-4 text-center">
-              ${renderTableCellBadge(dish.kinder)}
-            </td>
-            <td class="py-3 px-4 text-center">
-              ${renderTableCellBadge(dish.einkauf)}
-            </td>
-            <td class="py-3 px-4 text-center">
-              ${renderTableCellBadge(dish.einfach)}
-            </td>
-            <td class="py-3 px-4 text-center">
-              ${renderTableCellBadge(dish.bestellung)}
-            </td>
-          </tr>
-        `
-        )
+        .map((dish) => {
+          const isSelected = state.currentDish && state.currentDish.id === dish.id;
+          return `
+            <tr
+              data-dish-id="${dish.id}"
+              class="dish-row cursor-pointer transition-colors ${isSelected ? "bg-terracottaSoft/45" : "hover:bg-linen/70"}"
+            >
+              <td class="py-3 px-5 font-medium text-espresso">
+                ${escapeHtml(dish.essen)}
+              </td>
+              <td class="py-3 px-4 text-center">
+                ${renderTableCellBadge(dish.vorkochbar)}
+              </td>
+              <td class="py-3 px-4 text-center">
+                ${renderTableCellBadge(dish.kinderKompatibel)}
+              </td>
+              <td class="py-3 px-4 text-center">
+                ${renderTableCellBadge(dish.zeitnaherEinkauf)}
+              </td>
+              <td class="py-3 px-4 text-center">
+                ${renderTableCellBadge(dish.einfachKochbar)}
+              </td>
+              <td class="py-3 px-4 text-center">
+                ${renderTableCellBadge(dish.bestellung)}
+              </td>
+            </tr>
+          `;
+        })
         .join("");
+
+      // 2. Responsive Mobile-Karten rendern
+      dishesMobileCards.innerHTML = filtered
+        .map((dish) => {
+          const isSelected = state.currentDish && state.currentDish.id === dish.id;
+          const activeTags = PROPERTY_LABELS.filter((p) => dish[p.key] === "Ja")
+            .map(
+              (p) =>
+                `<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-oliveSoft text-olive">${p.label}</span>`
+            )
+            .join("");
+
+          return `
+            <div
+              data-dish-id="${dish.id}"
+              class="dish-row p-4 cursor-pointer transition-colors ${isSelected ? "bg-terracottaSoft/45" : "hover:bg-linen/70"}"
+            >
+              <div class="font-medium text-espresso text-base">${escapeHtml(dish.essen)}</div>
+              <div class="mt-2 flex flex-wrap gap-1.5">
+                ${
+                  activeTags ||
+                  '<span class="text-xs text-espressoMuted">Keine speziellen Eigenschaften</span>'
+                }
+              </div>
+            </div>
+          `;
+        })
+        .join("");
+
+      // Klick auf Zeile/Karte übernimmt das Gericht oben in die Zufalls-Ansicht
+      document.querySelectorAll(".dish-row").forEach((el) => {
+        el.addEventListener("click", () => {
+          const id = Number(el.getAttribute("data-dish-id"));
+          const found = DISHES.find((d) => d.id === id);
+          if (found) {
+            displayFeaturedDish(found);
+            updateView(false);
+          }
+        });
+      });
     }
 
     /**
@@ -729,6 +847,7 @@
     newRandomBtn.addEventListener("click", () => {
       const filtered = getFilteredDishes();
       pickRandomDish(filtered, true);
+      updateView(false);
     });
 
     document.querySelectorAll(".sort-th").forEach((th) => {
